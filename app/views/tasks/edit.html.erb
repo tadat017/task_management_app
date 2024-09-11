@@ -1,0 +1,34 @@
+<h1>タスクを編集</h1>
+
+<%= form_with model: @task, local: true do |form| %>
+  <div>
+    <%= form.label :title, 'タスク名' %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, '説明' %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :deadline, '期限' %>
+    <%= form.datetime_select :deadline %>
+  </div>
+
+  <div>
+    <%= form.label :priority, '優先度' %>
+    <%= form.select :priority, [['低', 0], ['中', 1], ['高', 2]] %>
+  </div>
+
+  <div>
+    <%= form.label :completed, '完了' %>
+    <%= form.check_box :completed %>
+  </div>
+
+  <div>
+    <%= form.submit '更新' %>
+  </div>
+<% end %>
+
+<%= link_to 'キャンセル', tasks_path %>

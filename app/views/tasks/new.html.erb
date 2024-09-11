@@ -2,22 +2,22 @@
 
 <%= form_with model: @task, local: true do |form| %>
   <div>
-    <%= form.label :title %>
+    <%= form.label :title, 'タスク名' %>
     <%= form.text_field :title %>
   </div>
   
   <div>
-    <%= form.label :description %>
+    <%= form.label :description, '詳細' %>
     <%= form.text_area :description %>
   </div>
   
   <div>
-    <%= form.label :deadline %>
+    <%= form.label :deadline, '期限'%>
     <%= form.datetime_select :deadline %>
   </div>
   
   <div>
-    <%= form.label :priority %>
+    <%= form.label :priority,  '優先度'%>
     <%= form.select :priority, [[0, '低'], [1, '中'], [2, '高']] %>
   </div>
 
