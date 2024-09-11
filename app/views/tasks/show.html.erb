@@ -4,5 +4,6 @@
 <p>完了: <%= @task.completed ? 'はい' : 'いいえ' %></p>
 <p>優先度: <%= @task.priority %></p>
 
+
 <%= link_to '編集', edit_task_path(@task) %> |
 <%= link_to 'タスク一覧に戻る', tasks_path %>

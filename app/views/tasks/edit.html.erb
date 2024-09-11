@@ -6,6 +6,12 @@
     <%= form.text_field :title %>
   </div>
 
+<div>
+  <%= form.label :category_id, 'カテゴリ' %>
+  <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: '選択してください' } %>
+</div>
+
+
   <div>
     <%= form.label :description, '説明' %>
     <%= form.text_area :description %>
@@ -13,7 +19,7 @@
 
   <div>
     <%= form.label :deadline, '期限' %>
-    <%= form.datetime_select :deadline %>
+    <%= form.date_field :deadline %>
   </div>
 
   <div>

@@ -1,0 +1,4 @@
+<div>
+  <%= form.label :category_id, 'カテゴリ' %>
+  <%= form.collection_select :category_id, Category.all, :id, :name %>
+</div>
