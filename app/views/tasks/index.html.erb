@@ -2,6 +2,13 @@
 
 <%= link_to '新しいタスクを追加', new_task_path %>
 
+<!-- 優先度フィルタ -->
+<%= form_with url: tasks_path, method: :get, local: true do %>
+  <%= select_tag :priority, options_for_select([['全て', ''], ['低', 0], ['中', 1], ['高', 2]], params[:priority]), prompt: '優先度でフィルタ' %>
+  <%= submit_tag 'フィルタ' %>
+<% end %>
+
+
 <ul>
   <% @tasks.each do |task| %>
     <li>

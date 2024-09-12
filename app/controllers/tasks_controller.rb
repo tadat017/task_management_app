@@ -3,9 +3,13 @@ class TasksController < ApplicationController
 
   # タスク一覧表示
   def index
-    @tasks = Task.order(deadline: :asc) # 期限が近い順に表示
+    if params[:priority].present?
+      @tasks = Task.where(priority: params[:priority]).order(priority: :desc, deadline: :asc)
+    else
+      @tasks = Task.order(priority: :desc, deadline: :asc)
+    end
   end
-
+  
   # 新しいタスク作成フォーム表示
   def new
     @task = Task.new
