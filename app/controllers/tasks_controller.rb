@@ -6,7 +6,7 @@ class TasksController < ApplicationController
     if params[:priority].present?
       @tasks = Task.where(priority: params[:priority]).order(priority: :desc, deadline: :asc)
     else
-      @tasks = Task.order(priority: :desc, deadline: :asc)
+      @tasks = Task.order(priority: :desc, deadline: :asc)#期限順
     end
   end
   
