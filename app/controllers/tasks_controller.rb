@@ -2,13 +2,24 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy, :toggle_complete]
 
   # タスク一覧表示
-  def index
-    if params[:priority].present?
-      @tasks = Task.where(priority: params[:priority]).order(priority: :desc, deadline: :asc)
-    else
-      @tasks = Task.order(priority: :desc, deadline: :asc)#期限順
-    end
+def index
+  tasks = Task.all
+
+  # 完了済みタスクの表示/非表示
+  if params[:completed] == 'true'
+    tasks = tasks.where(completed: true)
+  else
+    tasks = tasks.where(completed: false)
   end
+
+  # 優先度フィルタ
+  if params[:priority].present?
+    tasks = tasks.where(priority: params[:priority])
+  end
+
+  @tasks = tasks.order(priority: :desc, deadline: :asc) # 優先度順、期限順
+end
+
   
   # 新しいタスク作成フォーム表示
   def new
