@@ -11,6 +11,9 @@
 <!-- 完了済みタスクの表示/非表示切り替えリンク -->
 <%= link_to params[:completed] == 'true' ? '未完了タスクのみ表示' : '完了済みタスクを表示', tasks_path(priority: params[:priority], completed: params[:completed] == 'true' ? 'false' : 'true') %>
 
+<!-- 期限切れタスクの表示/非表示切り替えリンク -->
+<%= link_to params[:expired] == 'true' ? '期限切れタスクを非表示' : '期限切れタスクを表示', tasks_path(priority: params[:priority], expired: params[:expired] == 'true' ? 'false' : 'true') %>
+
 <!-- タスク一覧表示 -->
 <ul>
   <% @tasks.each do |task| %>

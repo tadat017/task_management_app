@@ -2,24 +2,30 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy, :toggle_complete]
 
   # タスク一覧表示
-def index
-  tasks = Task.all
-
-  # 完了済みタスクの表示/非表示
-  if params[:completed] == 'true'
-    tasks = tasks.where(completed: true)
-  else
-    tasks = tasks.where(completed: false)
+  def index
+    # 優先度フィルタ
+    @tasks = Task.all
+    if params[:priority].present?
+      @tasks = @tasks.where(priority: params[:priority])
+    end
+  
+    # 完了/未完了のフィルタ
+    if params[:completed] == 'true'
+      @tasks = @tasks.where(completed: true)
+    else
+      @tasks = @tasks.where(completed: false)
+    end
+  
+    # 期限切れタスクのフィルタ
+    if params[:expired] == 'true'
+      @tasks = @tasks.where('deadline < ?', Time.current)
+    else
+      @tasks = @tasks.where('deadline >= ? OR deadline IS NULL', Time.current)
+    end
+  
+    @tasks = @tasks.order(priority: :desc, deadline: :asc)
   end
-
-  # 優先度フィルタ
-  if params[:priority].present?
-    tasks = tasks.where(priority: params[:priority])
-  end
-
-  @tasks = tasks.order(priority: :desc, deadline: :asc) # 優先度順、期限順
-end
-
+  
   
   # 新しいタスク作成フォーム表示
   def new
