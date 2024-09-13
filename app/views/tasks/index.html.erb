@@ -2,6 +2,19 @@
 
 <%= link_to '新しいタスクを追加', new_task_path %>
 
+<!-- 現在のフィルタ状態を表示 -->
+<% if params[:completed] == 'true' %>
+  <p>現在表示中: 完了済みタスク</p>
+<% else %>
+  <p>現在表示中: 未完了タスク</p>
+<% end %>
+
+<% if params[:expired] == 'true' %>
+  <p>期限切れタスクが表示されています</p>
+<% else %>
+  <p>期限切れタスクは非表示です</p>
+<% end %>
+
 <!-- 優先度フィルタ -->
 <%= form_with url: tasks_path, method: :get, local: true do %>
   <%= select_tag :priority, options_for_select([['全て', ''], ['低', 0], ['中', 1], ['高', 2]], params[:priority]), prompt: '優先度でフィルタ' %>
