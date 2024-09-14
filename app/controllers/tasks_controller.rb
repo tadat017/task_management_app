@@ -71,6 +71,12 @@ class TasksController < ApplicationController
     redirect_to tasks_path, notice: 'タスクの状態が更新されました。'
   end
 
+  def delete_expired
+    Task.where('deadline < ?', Time.current).destroy_all
+    redirect_to tasks_path, notice: '期限切れタスクが削除されました。'
+  end
+
+
   private
 
   def set_task

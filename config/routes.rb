@@ -3,6 +3,11 @@ Rails.application.routes.draw do
     member do
       patch :toggle_complete
     end
+
+    collection do
+      delete :delete_expired # 期限切れタスクを一括削除するためのルートを追加
+    end
   end
+
   root 'tasks#index'
 end

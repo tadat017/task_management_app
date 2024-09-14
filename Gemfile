@@ -71,4 +71,5 @@ group :test do
 
 end
 gem 'active_hash'
+gem 'whenever', require: false
 
