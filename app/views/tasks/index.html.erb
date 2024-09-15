@@ -40,7 +40,9 @@
       [<%= task.completed ? '完了' : '未完了' %>]
       <%= link_to '編集', edit_task_path(task) %> |
       <%= link_to '削除', task_path(task), data: { turbo_method: :delete } %> |
-      <%= link_to task.completed ? '未完了にする' : '完了にする', toggle_complete_task_path(task), method: :patch %>
+    <!-- タスクの完了状態をトグル (Turbo対応の場合) -->
+      <%= link_to task.completed ? '未完了にする' : '完了にする', toggle_complete_task_path(task), data: { turbo_method: :patch } %>
+
     </li>
   <% end %>
 </ul>
