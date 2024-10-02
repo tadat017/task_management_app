@@ -2,59 +2,22 @@
 
 <div class="task-controls">
   <%= link_to '新しいタスクを追加', new_task_path, class: 'btn' %>
-
-  <!-- 現在のフィルタ状態を表示 -->
-  <% if params[:completed] == 'true' %>
-    <p class="filter-status">現在表示中: 完了済みタスク</p>
-  <% else %>
-    <p class="filter-status">現在表示中: 未完了タスク</p>
-  <% end %>
-
-  <% if params[:expired] == 'true' %>
-    <p class="filter-status">期限切れタスクが表示されています</p>
-  <% else %>
-    <p class="filter-status">期限切れタスクは非表示です</p>
-  <% end %>
 </div>
 
-<!-- 優先度フィルタ -->
-<div class="filter-form">
-  <%= form_with url: tasks_path, method: :get, local: true do %>
-    <%= select_tag :priority, options_for_select([['全て', ''], ['低', 0], ['中', 1], ['高', 2]], params[:priority]), prompt: '優先度でフィルタ', class: 'priority-select' %>
-    <%= submit_tag 'フィルタ', class: 'btn' %>
-  <% end %>
-</div>
-
-<!-- 完了済みタスクの表示/非表示切り替えリンク -->
-<div class="filter-links">
-  <%= link_to params[:completed] == 'true' ? '未完了タスクのみ表示' : '完了済みタスクを表示', tasks_path(priority: params[:priority], completed: params[:completed] == 'true' ? 'false' : 'true'), class: 'toggle-link' %>
-
-  <!-- 期限切れタスクの表示/非表示切り替えリンク -->
-  <%= link_to params[:expired] == 'true' ? '期限切れタスクを非表示' : '期限切れタスクを表示', tasks_path(priority: params[:priority], expired: params[:expired] == 'true' ? 'false' : 'true'), class: 'toggle-link' %>
-</div>
-
-<!-- 全タスク表示リンク -->
-<div class="filter-links">
-  <%= link_to '全タスク表示', tasks_path, class: 'btn' %>
-</div>
-
-<!-- タスク一覧表示 -->
 <ul class="task-list">
   <% @tasks.each do |task| %>
     <li class="task-item">
-      <%= task.title %> - <%= task.deadline ? task.deadline.strftime("%Y-%m-%d") : '期限なし' %> 
+      <%= task.title %> - <%= task.deadline.strftime("%Y-%m-%d") %>
       [<%= task.completed ? '完了' : '未完了' %>]
       <div class="task-actions">
         <%= link_to '編集', edit_task_path(task), class: 'btn edit-btn' %> |
         <%= link_to '削除', task_path(task), data: { turbo_method: :delete }, class: 'btn delete-btn' %> |
-        <!-- タスクの完了状態をトグル -->
         <%= link_to task.completed ? '未完了にする' : '完了にする', toggle_complete_task_path(task), data: { turbo_method: :patch }, class: 'btn toggle-complete-btn' %>
       </div>
     </li>
   <% end %>
 </ul>
 
-<!-- 期限切れタスクを一括削除 -->
 <div class="delete-expired-tasks">
   <%= link_to '期限切れタスクを一括削除', delete_expired_tasks_path, data: { turbo_method: :delete }, class: 'btn delete-btn' %>
 </div>
