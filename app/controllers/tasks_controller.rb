@@ -2,9 +2,28 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy, :toggle_complete]
 
   # タスク一覧表示
-  def index
-    @tasks = Task.all.order(priority: :desc, deadline: :asc)
-  end
+  
+    def index
+      # すべてのタスクを取得する
+      @tasks = Task.all
+  
+      # 以下はフィルタ処理
+      if params[:priority].present?
+        @tasks = @tasks.where(priority: params[:priority])
+      end
+  
+      if params[:expired] == 'true'
+        @tasks = @tasks.where('deadline < ?', Date.today)
+      elsif params[:expired] == 'false'
+        @tasks = @tasks.where('deadline >= ?', Date.today).or(@tasks.where(deadline: nil))
+      end
+  
+      if params[:completed].present?
+        @tasks = @tasks.where(completed: params[:completed] == 'true')
+      end
+    end
+  
+  
 
   def new
     @task = Task.new
