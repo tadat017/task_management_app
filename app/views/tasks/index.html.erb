@@ -18,3 +18,7 @@
 <% else %>
   <p>表示するタスクがありません。</p>
 <% end %>
+<!-- 期限切れタスクを一括削除 -->
+<div class="delete-expired-tasks">
+  <%= link_to '期限切れタスクを一括削除', delete_expired_tasks_path, data: { turbo_method: :delete }, class: 'btn delete-btn' %>
+</div>
