@@ -3,25 +3,14 @@ class TasksController < ApplicationController
 
   # タスク一覧表示
   
-    def index
-      # すべてのタスクを取得する
-      @tasks = Task.all
+  def index
+    @tasks = Task.all
+    @tasks = @tasks.where(priority: params[:priority]) if params[:priority].present?
+    @tasks = @tasks.where(completed: params[:completed] == 'true') if params[:completed].present?
+    @tasks = @tasks.where('deadline < ?', Date.today) if params[:expired] == 'true'
+  end
   
-      # 以下はフィルタ処理
-      if params[:priority].present?
-        @tasks = @tasks.where(priority: params[:priority])
-      end
   
-      if params[:expired] == 'true'
-        @tasks = @tasks.where('deadline < ?', Date.today)
-      elsif params[:expired] == 'false'
-        @tasks = @tasks.where('deadline >= ?', Date.today).or(@tasks.where(deadline: nil))
-      end
-  
-      if params[:completed].present?
-        @tasks = @tasks.where(completed: params[:completed] == 'true')
-      end
-    end
   
   
 
@@ -65,6 +54,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :description, :deadline, :completed, :priority)
+    params.require(:task).permit(:title, :description, :deadline, :completed, :priority, :category_id)
   end
 end

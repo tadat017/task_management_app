@@ -1,4 +1,24 @@
-<div>
-  <%= form.label :category_id, 'カテゴリ' %>
-  <%= form.collection_select :category_id, Category.all, :id, :name %>
-</div>
+<%= form_with(model: task, local: true) do |form| %>
+  <!-- タイトル -->
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <!-- 締め切り -->
+  <div class="field">
+    <%= form.label :deadline %>
+    <%= form.date_field :deadline %>
+  </div>
+
+  <!-- カテゴリー選択 -->
+  <div class="field">
+    <%= form.label :category %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, prompt: 'カテゴリーを選択' %>
+  </div>
+
+  <!-- 完了ボタン -->
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
