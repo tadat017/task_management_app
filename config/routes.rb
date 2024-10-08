@@ -5,7 +5,8 @@ Rails.application.routes.draw do
     end
 
     collection do
-      delete :delete_expired # 期限切れタスクを一括削除するためのルートを追加
+        delete 'delete_expired', to: 'tasks#delete_expired'
+      # 期限切れタスクを一括削除するためのルートを追加
     end
   end
 
