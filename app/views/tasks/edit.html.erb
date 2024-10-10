@@ -1,40 +1,38 @@
-<h1>タスクを編集</h1>
+<h1 class="page-title">タスクを編集</h1>
 
-<%= form_with model: @task, local: true do |form| %>
-  <div>
-    <%= form.label :title, 'タスク名' %>
-    <%= form.text_field :title %>
+<div class="task-form-container">
+  <%= form_with model: @task, local: true do |form| %>
+    <div class="form-group">
+      <%= form.label :title, 'タスク名' %>
+      <%= form.text_field :title, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :category_id, 'カテゴリ' %>
+      <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: '選択してください' }, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :description, '詳細' %>
+      <%= form.text_area :description, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :deadline, '期限' %>
+      <%= form.date_field :deadline, class: 'form-control short-input' %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :priority, '優先度' %>
+      <%= form.select :priority, [['低', 0], ['中', 1], ['高', 2]], {}, class: 'form-control short-input' %>
+    </div>
+
+    <div class="form-actions">
+      <%= form.submit '更新', class: 'btn submit-btn' %>
+    </div>
+  <% end %>
+
+  <div class="back-link">
+    <%= link_to 'タスク一覧に戻る', tasks_path, class: 'btn back-btn' %>
   </div>
-
-<div>
-  <%= form.label :category_id, 'カテゴリ' %>
-  <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: '選択してください' } %>
 </div>
-
-
-  <div>
-    <%= form.label :description, '説明' %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div>
-    <%= form.label :deadline, '期限' %>
-    <%= form.date_field :deadline %>
-  </div>
-
-  <div>
-    <%= form.label :priority, '優先度' %>
-    <%= form.select :priority, [['低', 0], ['中', 1], ['高', 2]] %>
-  </div>
-
-  <div>
-    <%= form.label :completed, '完了' %>
-    <%= form.check_box :completed %>
-  </div>
-
-  <div>
-    <%= form.submit '更新' %>
-  </div>
-<% end %>
-
-<%= link_to 'キャンセル', tasks_path %>
