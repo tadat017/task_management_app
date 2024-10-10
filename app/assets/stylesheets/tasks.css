@@ -59,6 +59,10 @@
   display: flex;
   justify-content: space-between;
 }
+.form-actions {
+  margin-top: 20px; /* ボタンの上に余白を追加して他の要素と離す */
+  text-align: center; /* ボタンを中央揃えに */
+}
 
 .task-actions {
   display: flex;
@@ -67,4 +71,59 @@
 
 .task-actions .btn {
   margin: 0;
+}
+
+/* タスク作成フォームのスタイルを調整 */
+.task-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center; /* フォーム全体の要素を中央に */
+}
+
+/* フォームフィールドのスタイル */
+.form-control {
+  width: 100%; /* 入力欄を全幅に */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: block;
+  margin: 10px auto; /* 入力欄を中央揃えに */
+}
+
+/* テキストエリアのサイズを固定 */
+textarea.form-control {
+  resize: none; /* サイズ変更を禁止 */
+  height: 150px; /* 高さを固定 */
+}
+
+/* ボタンの余白を調整して中央揃え */
+.form-actions {
+  margin-top: 20px; /* ボタン上に余白を追加 */
+  text-align: center; /* ボタンを中央揃えに */
+}
+
+/* 戻るボタンの余白も調整 */
+.back-link {
+  margin-top: 20px;
+  text-align: center;
+}
+/* フォームフィールドの幅を調整 */
+.form-control {
+  width: 80%; /* 入力欄の幅を全幅の80%に調整 */
+  max-width: 400px; /* 最大幅を400pxに設定して短くする */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: block;
+  margin: 10px auto; /* 入力欄を中央揃えに */
+}
+
+.short-input {
+  width: 50%; /* フィールドの幅を短く */
+  max-width: 200px; /* 最大幅を200pxに制限 */
+  margin: 0 auto; /* 中央揃え */
 }
