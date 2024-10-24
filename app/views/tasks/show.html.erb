@@ -1,19 +1,44 @@
 <h1 class="page-title">タスク詳細</h1>
 
-<div class="task-details">
-  <p><strong>タイトル:</strong> <%= @task.title %></p>
-  <p><strong>説明:</strong> <%= @task.description %></p>
-  <p><strong>期限:</strong> <%= @task.deadline.present? ? @task.deadline.strftime("%Y-%m-%d") : '期限なし' %></p>
-  <p><strong>カテゴリー:</strong> <%= @task.category.present? ? @task.category.name : 'カテゴリーなし' %></p>
-  <p><strong>完了状態:</strong> <%= @task.completed ? '完了' : '未完了' %></p>
-</div>
+<div class="task-form-container">
+  <!-- タイトル -->
+  <div class="form-group short-input">
+    <label><strong>タイトル</strong></label>
+    <div class="form-control-static"><%= @task.title %></div>
+  </div>
 
-<div class="task-actions">
-  <%= link_to '編集', edit_task_path(@task), class: 'btn edit-btn' %>
-  <%= link_to '削除', task_path(@task), data: { turbo_method: :delete }, class: 'btn delete-btn' %>
-</div>
+  <!-- 説明 -->
+  <div class="form-group">
+    <label><strong>説明</strong></label>
+    <div class="form-control-static description"><%= @task.description %></div>
+  </div>
 
-<!-- 間隔を開けるためにスタイルを追加 -->
-<div class="back-to-list" style="margin-top: 20px;">
-  <%= link_to 'タスク一覧に戻る', tasks_path, class: 'btn back-btn' %>
+  <!-- 期限 -->
+  <div class="form-group short-input">
+    <label><strong>期限</strong></label>
+    <div class="form-control-static"><%= @task.deadline.present? ? @task.deadline.strftime("%Y-%m-%d") : '期限なし' %></div>
+  </div>
+
+  <!-- カテゴリー -->
+  <div class="form-group short-input">
+    <label><strong>カテゴリー</strong></label>
+    <div class="form-control-static"><%= @task.category.present? ? @task.category.name : 'カテゴリーなし' %></div>
+  </div>
+
+  <!-- 完了状態 -->
+  <div class="form-group short-input">
+    <label><strong>完了状態</strong></label>
+    <div class="form-control-static"><%= @task.completed ? '完了' : '未完了' %></div>
+  </div>
+
+  <!-- ボタンを中央に配置 -->
+  <div class="form-actions">
+    <%= link_to '編集', edit_task_path(@task), class: 'btn submit-btn' %>
+    <%= link_to '削除', task_path(@task), data: { turbo_method: :delete }, class: 'btn delete-btn' %>
+  </div>
+
+  <!-- 戻るボタン -->
+  <div class="back-link">
+    <%= link_to 'タスク一覧に戻る', tasks_path, class: 'btn back-btn' %>
+  </div>
 </div>
