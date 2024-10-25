@@ -31,3 +31,5 @@
 |created_at	         |datetime|レコード作成日時（自動生成）
 |updated_at	         |datetime|レコード更新日時（自動生成）
 
+BASIC認証 admin
+pass      2222
