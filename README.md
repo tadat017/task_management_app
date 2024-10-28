@@ -31,5 +31,6 @@
 |created_at	         |datetime|レコード作成日時（自動生成）
 |updated_at	         |datetime|レコード更新日時（自動生成）
 
-BASIC認証 admin
+URL:https://task-management-app-y6ly.onrender.com/tasks
+BASIC認証ID admin
 pass      2222
