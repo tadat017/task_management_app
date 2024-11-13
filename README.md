@@ -34,4 +34,3 @@
 URL:https://task-management-app-y6ly.onrender.com/tasks
 BASIC認証ID admin
 pass      2222 
- 
